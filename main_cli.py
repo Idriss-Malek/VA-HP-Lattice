@@ -3,6 +3,9 @@
 import argparse
 import os
 from train import *
+import warnings
+warnings.filterwarnings("ignore")
+
 
 # cli argument parser
 def parse_args():
@@ -65,7 +68,7 @@ if __name__ == "__main__":
     energies_train, samples_train, logprobs_train, temperatures = model.test_run()
 
     # post-processing
-    # os.makedirs(args.path_data_folder, exist_ok=True)
+    os.makedirs(args.path_data_folder, exist_ok=True)
     np.save(os.path.join(args.path_data_folder, "energies_training.npy"), energies_train)
     np.save(os.path.join(args.path_data_folder, "logprobs_training.npy"), logprobs_train)
     np.save(os.path.join(args.path_data_folder, "folds_training.npy"), get_unique_gs_folds(samples_train, energies_train))

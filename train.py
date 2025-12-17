@@ -4,6 +4,8 @@ import tensorflow as tf     # version 2.15.1
 import tf_agents            # version 0.19.0
 import random
 import time
+import warnings
+warnings.filterwarnings("ignore")
 
 """
 DilatedRNN Class
@@ -500,8 +502,8 @@ class vca:
                 temperatures = np.zeros(self.num_anneal)
                 minE = 0
                 start = time.time()
+                
                 for it0 in range(self.num_anneal):
-                    # cool temperature based on annealer
                     if self.annealer == 'linear':
                         T = self.T0*(1-it0/self.num_anneal)                 # linear schedule
                     else:
@@ -567,6 +569,6 @@ class vca:
                     # return training data: energies_history, samples_history, logprobs_history
                     # return post-training data: energies_cooled, samples_cooled, logprobs_cooled
                     # return annealing schedule: temperatures
-                    return energies_history, samples_history, logprobs_history, temperatures
+        return energies_history, samples_history, logprobs_history, temperatures
 
 
